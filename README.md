@@ -7,6 +7,7 @@ This project aims to solve this problem, by using regressor models to predict th
 ## Introduction
 
 Unlike hotels, which have their own pricing system, Airbnb prices are usually determined by the hosts empirically. It poses challenges for the new hosts, as well as for existing hosts with new listings, to determine the prices reasonably high yet without losing popularity. On the consumers’ side, though they can compare the price across other similar listings, it is still valuable for them to know whether the current price is worthy and if it is a good time to book the rooms. This project is used to determine and predict the price of Airbnb listings in major US cities like Boston, Chicago, Washington DC, Los Angeles, New York, San Francisco.
+
 The price for Airbnb renting depends on multiple factors, and we divide the input type into 3 categories, including continuous, categorical, set (amenities) features. We have extracted more than 60 features from the dataset. Here we only list a few of them that are both representative and important for the task, such as room size {accommodates, bathrooms, bedrooms, beds, ...}, location {neighbourhood, latitude, longitude, ...}, facilities {amenities, property type, ...}, and booking related {availability, cancellation policy, host response rate, ...}. The ground-truth label is the actual base price, and we use a variety of regression approaches including linear regression, ridge regression, lasso regression, as well as XG boost, to predict the value.
 
 ## Methods and Techniques
