@@ -34,6 +34,28 @@ Based on the low correlation values between the numerical features and the log p
 *  host_response_rate o latitude
 * longitude
 
+<img width="717" alt="Screenshot 2023-10-24 at 5 41 06 PM" src="https://github.com/SaiVivekAlli09/AirBnB-Price-Prediction/assets/126822808/bfbfb66e-5ac0-48fd-8f15-8f5294eb0bce">
+
+Though number_of__reviews and review_score_rating have low correlation values, they are not dropped as they have significant impact in price as shown in below plot.
+
+<img width="904" alt="Screenshot 2023-10-24 at 5 41 27 PM" src="https://github.com/SaiVivekAlli09/AirBnB-Price-Prediction/assets/126822808/229ca794-de23-4831-995f-a2c02f26a30b">
+
+## Feature Engineering
+
+The distribution of train and test data in certain area in the city of DC as an example is as follows, with train data points in red and test data points in blue colour.
+
+<img width="884" alt="Screenshot 2023-10-24 at 5 53 45 PM" src="https://github.com/SaiVivekAlli09/AirBnB-Price-Prediction/assets/126822808/c1b64331-4629-4b2b-b8f4-1cb45359f955">
+
+The dataset is classified into three sets of data: categorical, continuous and a set of categorical values.
+Categorical Data: Features like, property_type, room_type, bed_type, city, cancellation_policy are converted into numeric format by one-hot encoding using pd.get_dummies().
+
+**Set of Categorical Data:** Only one feature, amenities, comes under this category where a bunch of categorical values are arranged as a set, which are split into a numpy array and concatenated to the data set in binary format.
+
+**Continuous Data:** As the continuous data is in already in numeric format, no changes are applied on this data. The features like, bathrooms, accommodates etc., comes under continuous data type.
+
+This above data is converted into vectorized form using PCA – principal component analysis.
+
+
 ## Building a Machine Learning Model
 
 We experimented with machine learning models for price prediction. As this is the regression task, the evaluation metric chosen was mean squared error (MSE). For accuracy, we have calculated r squared value for each model produced.
@@ -46,14 +68,36 @@ We experimented with machine learning models for price prediction. As this is th
 
 **XG Boost**: XG Boost is a powerful approach for building supervised regression models. It contains loss function and a regularization term. It tells about the difference between actual values and predicted values, i.e., how far the model results are from the real values. Compared to other regressor model, this gave best metrics.
 
+## Evaluation Metrics
 
+We have used RMSE and R2 metrics in this project to evaluate the training set of combined train data and to compare the difference in the predicted price value of the test data between the combined test data set and individual cities, used RMSE.
 
+## Experimental Results
 
+We have experimented our data with different combinations of features and labels as follows,
 
+**Feature: Continuous, Label: Int Price and Log Price –** Applied different models by using only the continuous features of the data set to predict int price and log price. Below is the table with RMSE and R2 metric values on train data set.
 
+<img width="756" alt="Screenshot 2023-10-24 at 5 42 32 PM" src="https://github.com/SaiVivekAlli09/AirBnB-Price-Prediction/assets/126822808/6c268054-81c7-4037-ac50-133cf839a149">
 
+**Feature: Continuous, Categorical and with Amenities, Label:** Int Price and Log Price – Applied different models on using the continuous, categorical and amenities features of the data set to predict int price and log price.
 
+<img width="760" alt="Screenshot 2023-10-24 at 5 42 45 PM" src="https://github.com/SaiVivekAlli09/AirBnB-Price-Prediction/assets/126822808/e8d365f4-f60c-4c73-a2d8-0bae73088b8c">
 
+We find that the R2 score of Ridge regression on continuous, categorical and amenities features to predict int price is the highest score in all of our experimental results.
+This table shows the RMSE scores of individual cities b/w the predicted price of individual test data and combined test data.
+
+<img width="775" alt="Screenshot 2023-10-24 at 5 43 09 PM" src="https://github.com/SaiVivekAlli09/AirBnB-Price-Prediction/assets/126822808/f2f472ec-2053-441c-812b-2626c1d7963c">
+
+## Conclusion
+
+Overall, we have performed extensive feature selection and engineering, and experimented with various machine learning approaches in predicting Airbnb listing price. We showed that XG boost and lasso regression out-perform other approaches, and achieve r-squared value around 0.6. We also showed that by training the datasets from different cities individually.
+
+* Linear regression worked correctly when only continuous values are included, with categorical values are included and K-fold is applied, few splits are seen with very higher values of RMSE and R2 in the range of e+17.
+
+* When tried to implement the regression models, the values were not consistent and are largely differed from each run.
+
+* Unable to apply k-nearest or svc models on this data set as the target variable is a continuous value and can be applied on regression models. Though random forest model is working of this data set, it is taking a lot of time in order to compute the results and the results were comparatively similar to XG boost.
 
 
 
