@@ -12,3 +12,50 @@ The price for Airbnb renting depends on multiple factors, and we divide the inpu
 ## Methods and Techniques
 
 As the target variable to be predicted is the price, which is a continuous value, we can apply regression models like linear regression, ridge regression etc., but unable to apply classification models like k-nearest neighbors, svc etc. we used the default settings for all machine learning approaches imported from the sklearn package. Note that we have experimented with different parameters, like learning rate, n-estimators in XG Boost., and the output metrics stay largely unchanged.We have applied these machine learning approaches with different label transformations, with the target variable as an integer and as logarithmic value and we found that logarithmic transformation largely improves the model performance
+
+<img width="838" alt="Screenshot 2023-10-24 at 5 40 18 PM" src="https://github.com/SaiVivekAlli09/AirBnB-Price-Prediction/assets/126822808/50f3cfcb-0ef0-4e7d-8528-937438fb7bc3">
+
+## Exploratory Data Analysis
+
+**Data Cleaning**: Missing values in both train and test data are found and filled them with appropriate values. Feature Selection:
+Some of the features, as below, which doesn’t show any significant differences in the price prediction are eliminated.
+
+* name
+* thumbnail_url 
+*  description
+* host_since
+*  first_review
+* last_review
+* instant_bookable
+
+Based on the low correlation values between the numerical features and the log price (target variable), below features are eliminated/dropped.
+* id
+*  host_has_profile_pic o host_identity_verified
+*  host_response_rate o latitude
+* longitude
+
+## Building a Machine Learning Model
+
+We experimented with machine learning models for price prediction. As this is the regression task, the evaluation metric chosen was mean squared error (MSE). For accuracy, we have calculated r squared value for each model produced.
+
+**Linear regressor**: We have used this model to define the relation between features and target variable through an equation that tries to represent the relationship between one dependent and multiple independent variables.
+
+**Ridge regressor**: As per the evaluation metrics, there is a slight improvement in this model because the value of the R-squared has been increased. This reduced the model complexity by coefficient shrinkage because it uses L2 regularization technique.
+
+**Lasso regressor**: This model is quite similar to ridge, but after evaluation metrics we have observed that both the RMSE and R-square for this model has increased. Therefore, lasso model is predicting better than both linear and ridge. This model is generally used when there are more number of features as it automatically does feature selection.
+
+**XG Boost**: XG Boost is a powerful approach for building supervised regression models. It contains loss function and a regularization term. It tells about the difference between actual values and predicted values, i.e., how far the model results are from the real values. Compared to other regressor model, this gave best metrics.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
